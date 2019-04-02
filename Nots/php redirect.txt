@@ -1,0 +1,6 @@
+if(($_SERVER['SERVER_NAME'] == "yated.org" || $_SERVER['SERVER_NAME'] == "www.yated.org") && $_SERVER['REQUEST_URI'] == "/")
+{
+  header("Location: http://yated.org/node/1414");
+  die();
+}
+

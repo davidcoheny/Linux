@@ -1,0 +1,33 @@
+Backup Script
+===============
+#!/bin/bash
+
+USER="root"
+PASSWORD="PASSWORD-HERE"
+OUTPUTDIR="/root"
+MYSQLDUMP="/usr/bin/mysqldump"
+MYSQL="/usr/bin/mysql"
+
+rm -f $OUTPUTDIR/*.backup.sql
+
+# get a list of databases
+databases=`$MYSQL --user=$USER --password=$PASSWORD -e "SHOW DATABASES" | tr -d "| " | grep -v Database | grep -v test | grep -v temp | grep -v schema | grep -v mysql`
+
+# dump each database in turn
+for db in $databases; do
+    echo $db
+    $MYSQLDUMP --force --opt --user=$USER --password=$PASSWORD \
+    --databases $db > "$OUTPUTDIR/$db.backup.sql"
+done
+
+tar czf /mnt/backup/`date +"%Y-%m-%d_%H-%M-%S"`_SERVERNAME_backup.tar.gz /var/spool/cron /etc /root/*.backup.sql /var/www/html
+
+find /mnt/backup/ -name '*SERVERNAME_backup.tar.gz' -mtime +7 -exec rm {} \;
+
+exit 0
+
+
+
+crontab -e  
+
+09 12 * * * /root/backup.sh > /dev/null 2>&1  

@@ -1,0 +1,1 @@
+echo INKNTONER-WEB02.server |tr '[A-Z]' '[a-z]'

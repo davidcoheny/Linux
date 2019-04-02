@@ -1,0 +1,27 @@
+/etc/nagios/conf.d
+
+cp the config file and rum re.sh
+
+
+
+define host{
+        use             linux-server
+        host_name       web
+        alias           web
+        address         192
+        contact_groups  intercloud_admins
+        hostgroups      dedicated_servers
+        parents         netvision
+}
+
+define service{
+        use                             generic-service
+        host_name                       web
+        service_description             SSH
+        check_command                   check_ssh
+        notifications_enabled           1
+        contact_groups                  intercloud_admins
+}
+
+
+

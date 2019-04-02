@@ -1,0 +1,1 @@
+find /etc/nginx/ -type f -exec sed -i 's/172.20.15.22/172.20.15.26/g'

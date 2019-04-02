@@ -1,0 +1,33 @@
+# sudo is required later for the server part
+# try to cache the authentication
+sudo true
+
+
+# common definitions
+paralel=10
+size=256
+host=localhost
+
+
+# server part
+
+# remove the files from previous runs
+for i in $(seq -w ${paralel}); do rm -vf ${i}.log ${i}.bin; done
+
+# generate the input files
+for i in $(seq -w ${paralel}); do dd if=/dev/zero of=${i}.bin bs=1M count=${size}& done; wait
+
+# set the initial state
+sync; echo 3 | sudo tee /proc/sys/vm/drop_caches
+
+# serve the files
+for i in $(seq -w ${paralel}); do iperf3 -1 -s -p 200${i} -F ${i}.bin &>/dev/null& done;
+
+
+# client part
+
+# read the files over the network
+for i in $(seq -w ${paralel}); do iperf3 -c ${host} -p 200${i} &>${i}.log & done; wait
+
+# get the results
+grep Interval *.log | tail -1 && grep -Ee "sender|receiver" *.log

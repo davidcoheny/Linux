@@ -1,0 +1,23 @@
+<VirtualHost *:80>
+    ServerAdmin webmaster@mycard-romania.com
+    DocumentRoot /var/www/html/mycard-romania.com
+    ServerName  mycard-romania.com
+    ServerAlias www.mycard-romania.com
+    ErrorLog logs/mycard-romania.com-error_log
+    CustomLog logs/mycard-romania.com-access_log common
+<Directory /var/www/html/mycard-romania.com>
+    AllowOverride       All
+</Directory>
+</VirtualHost>
+
+
+
+<VirtualHost *:80>
+    ServerName music.ono.ac.il
+    DocumentRoot /var/www/html/music.ono.ac.il
+    ErrorLog logs/music.ono.ac.il-error.log
+    CustomLog logs/music.ono.ac.il-requests.log combined
+</VirtualHost>
+
+
+

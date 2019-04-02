@@ -1,0 +1,5 @@
+<Location /server-status>
+    SetHandler server-status
+    Order allow,deny
+    Allow from  82.31.237.12 82.196.229.0/24
+</Location>

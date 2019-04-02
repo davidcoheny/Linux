@@ -1,0 +1,23 @@
+
+
+
+iptables config
+================
+yum install firewalld
+systemctl start firewalld.service
+systemctl enable firewalld.service
+firewall-cmd --zone=public --change-interface=eth0
+firewall-cmd --list-all
+firewall-cmd add ZONE=public to /etc/sysconfig/network-scripts/ifcfg-eth0
+firewall-cmd --zone=public --permanent --add-service=http
+firewall-cmd --zone=public --permanent --add-service=ftp
+firewall-cmd --permanent --zone=public --add-source=212.235.52.30/32
+
+firewall-cmd --zone=public --add-rich-rule='rule family="ipv4" source address="212.235.52.30/32" accept' --permanent
+firewall-cmd --zone=public --add-rich-rule='rule family="ipv4" source address="82.80.26.205/32" accept' --permanent
+firewall-cmd --zone=public --add-rich-rule='rule family="ipv4" source address="192.243.127.45/32" accept' --permanent
+firewall-cmd --zone=public --add-rich-rule='rule family="ipv4" source address="31.168.157.171/32" accept' --permanent
+restart
+
+
+

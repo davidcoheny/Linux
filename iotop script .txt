@@ -1,0 +1,17 @@
+#!/bin/bash
+
+for ((i=600; i>0; i--)); do
+        sleep 1 &
+
+DATE=`date`
+
+echo "$DATE" >> /var/log/iotop
+
+echo "###################" >> /var/log/iotop
+
+/usr/sbin/iotop --batch -n 1 >> /var/log/iotop
+
+echo "##################" >> /var/log/iotop
+wait 
+done
+exit

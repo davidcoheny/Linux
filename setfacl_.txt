@@ -1,0 +1,1 @@
+ setfacl -Rdm g:groupnamehere:rwx /base/path/members/

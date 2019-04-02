@@ -1,0 +1,1 @@
+awk -F : '{print $1,$(NF-1)}' /etc/passwd - dlimeter : print the first and 1 befor the last (the lase NF)

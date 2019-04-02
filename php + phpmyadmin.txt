@@ -1,0 +1,27 @@
+https://www.phpmyadmin.net
+
+https://webtatic.com  -PHP 7
+install php php-mysql and upgrad
+https://webtatic.com/packages/php70/   to up grade
+
+
+for login popup 
+
+vi /var/www/html/phpmyadmin/.htaccess
+
+creat the passwd with >> htpasswd -c
+
+AuthUserFile /etc/httpd/conf/password.txt
+AuthType Basic
+AuthName "Restricted Area"
+
+Require valid-user
+
+
+
+in .htacess 
+
+/etc/http/conf/http.cong
+
+look for .htacees and allow
+

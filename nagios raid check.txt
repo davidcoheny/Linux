@@ -1,0 +1,46 @@
+in /etc/nagios/nrpe.cnf command[check_raid]=/usr/lib64/nagios/plugins/check_raid
+############################################################################
+nagios plugin 
+#!/bin/sh
+#
+
+PROGPATH=`echo $0 | sed -e 's,[\\/][^\\/][^\\/]*$,,'`
+
+. $PROGPATH/utils.sh
+
+
+if [ ! -f /tmp/raid_status_check.txt ]; then
+    echo "/tmp/raid_status_check.txt does not exist."
+    exit $STATE_UNKNOWN
+fi
+mdstat=`cat /proc/mdstat`
+value=`cat /tmp/raid_status_check.txt`
+if [ $value -eq 8 ]
+then
+  echo "RAID 1 Volume 0 status: OK. $mdstat"
+  exit $STATE_OK
+fi
+
+echo "Raid Status Unknown"
+exit $STATE_CRITICAL
+
+
+######################################################################
+in server  file name /root/check_raid.sh
+#!/bin/bash
+raidstatus=`cat /proc/mdstat  | grep -oh U | wc -l`
+echo $raidstatus > /tmp/raid_status_check.txt
+
+
+*/10 * * * * /root/check_raid.sh  > /dev/null 2>&1
+
+#######################################################################
+service in nagios monitor
+define service{
+        use                             generic-service
+        host_name                       cpanel10
+        service_description             Raid Status
+        check_command                   check_nrpe!check_raid
+        contact_groups                  intercloud_admins
+        notifications_enabled           1
+}

@@ -1,0 +1,7 @@
+#pvecm - Proxmox VE Cluster Manager
+#cat /etc/pve/storage.cfg cat /e	
+# Get a quick overview on how fast your system is: pveperf
+# List all your KVM machines: qm list
+# See how much memory your machine 101 has: qm config 101 | grep ^memory
+# Verify the subscription status of your hardware node: pvesubscription get
+# Start a backup of machine 101: vzdump 101 -compress lzo

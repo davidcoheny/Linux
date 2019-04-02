@@ -1,0 +1,19 @@
+curl -X GET "https://api.cloudflare.com/client/v4/zones/4b951538f24c9ee6f112b96b3e68881d/ssl/verification" \
+     -H "Content-Type:application/json" \
+     -H "X-Auth-Key:8c446bd4d690a933aa67b3c3f2ec72d8b5ddb" \
+     -H "X-Auth-Email:skyron@cf.securacloud.com"
+
+
+
+{"result":[{"certificate_status":"pending_validation","cert_pack_uuid":"b17aa8ae-ac42-41c2-9c57-014f9ae29162","validation_method":"http","validation_type":"dv","verification_info":{"http_url":"http:\/\/www.harrypotter.bloomsbury.com\/.well-known\/pki-validation\/ca3-0115174a2f0a40e283ca7dc32cff8daf.txt","http_body":"ca3-4356ec36d97e4cec8f49d7315c108def"},"hostname":"www.harrypotter.bloomsbury.com"},{"certificate_status":"pending_validation","cert_pack_uuid":"c2f0dd47-7512-44ff-8e54-eec69949d30c","validation_method":"http","validation_type":"dv","verification_info":{"http_url":null,"http_body":null},"hostname":"hpmedia.bloomsbury.com"},{"certificate_status":"pending_validation","cert_pack_uuid":"8196cd29-fe88-464b-be22-64f231f76975","validation_method":"http","validation_type":"dv","verification_info":{"http_url":"http:\/\/www.bloomsbury.com\/.well-known\/pki-validation\/ca3-500246ec008744d58cf78cbf8aaa7ab1.txt","http_body":"ca3-0cfc74aedfc44e7fbd9f13b32763d179"},"hostname":"www.bloomsbury.com"},{"certificate_status":"pending_validation","cert_pack_uuid":"1aa1ec92-036a-4b33-899d-717bc3745f79","validation_method":"http","validation_type":"dv","verification_info":{"http_url":"http:\/\/reporting.bloomsbury.com\/.well-known\/pki-validation\/ca3-7b6a6cde7f2742fca776750bdabad198.txt","http_body":"ca3-8ec66e753f8b4379bf30e33715d8ade5"},"hostname":"reporting.bloomsbury.com"},{"certificate_status":"pending_validation","cert_pack_uuid":"d8208ac8-d123-4cea-9969-79fc665ea1b0","validation_method":"http","validation_type":"dv","verification_info":{"http_url":"http:\/\/bloomsbury.com\/.well-known\/pki-validation\/ca3-651f254c1b524a0eb837d170a40306b0.txt","http_body":"ca3-d7eaff2b702b41e285b22153420f6a5e"},"hostname":"bloomsbury.com"},{"certificate_status":"pending_validation","cert_pack_uuid":"a6e115da-1f45-4419-84cf-d6101bc4c439","validation_method":"http","validation_type":"dv","verification_info":{"http_url":"http:\/\/onixftp.bloomsbury.com\/.well-known\/pki-validation\/ca3-259d96da758447bbbddd7ac70dd2a389.txt","http_body":"ca3-5dbdcbfe4d114af982b62617fa1dda81"},"hostname":"onixftp.bloomsbury.com"},{"certificate_status":"pending_validation","cert_pack_uuid":"e6434f3b-0063-4a0d-af6d-eea5c0973315","validation_method":"http","validation_type":"dv","verification_info":{"http_url":"http:\/\/media.bloomsbury.com\/.well-known\/pki-validation\/ca3-002b85521939451b9e31d5aad78e5589.txt","http_body":"ca3-5a3b73c2a5414afebec306f4412c99c5"},"hostname":"media.bloomsbury.com"},{"certificate_status":"pending_validation","cert_pack_uuid":"d233153d-fc83-4eef-952d-aaf2a3080b16","validation_method":"http","validation_type":"dv","verification_info":{"http_url":"http:\/\/harrypotter.bloomsbury.com\/.well-known\/pki-validation\/ca3-dbfc5633750047e5aa42926d339dc10d.txt","http_body":"ca3-1465956202cd4e519601fe8fb05b8967"},"hostname":"harrypotter.bloomsbury.com"}],"success":true,"errors":[],"messages":[]}root@SEC-LPT-JEB:/mnt/c/Users/JohnBiswell/Secura Hosting Ltd/OneDrive - Secura Hosting Ltd/Clients/Golden Tours/SSL#
+
+
+
+
+
+
+curl -s XPATCH "https://api.cloudflare.com/client/v4/zones/4b951538f24c9ee6f112b96b3e68881d/custom_hostnames" \
+       -H "X-Auth-Email:skyron@cf.securacloud.com" -H "X-Auth-Key:8c446bd4d690a933aa67b3c3f2ec72d8b5ddb" \
+       -H "Content-Type: application/json" \
+       -d '{"hostname":"www.bloomsbury.com", "ssl":{"method":"http","type":"dv"}}'
+

@@ -1,0 +1,3 @@
+Redirect 301 /he/cyberbullying https://www.hackaveret.org
+
+Redirect 301 THIS_IS_THE DOMAIN/he/cyberbullying https://www.hackaveret.org

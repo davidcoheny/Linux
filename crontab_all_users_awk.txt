@@ -1,0 +1,1 @@
+for i in $(cat /etc/passwd | awk -F ":"  '{ print $1 }') ; do crontab -u $i -l ; done

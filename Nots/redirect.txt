@@ -1,0 +1,9 @@
+<VirtualHost *:80>
+DocumentRoot /var/www/html/david2/
+ServerName david2.com
+RewriteEngine On
+rewritecond %{http_host} ^david2.com
+rewriteRule ^(.*) http://www.newdomain.com/page.html [R=301,L]
+
+</VirtualHost>
+
