@@ -1,0 +1,1 @@
+/usr/local/psa/bootstrapper/pp12.5.30-bootstrapper/bootstrapper.sh repair

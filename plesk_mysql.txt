@@ -1,0 +1,1 @@
+mysql -uadmin -p$(cat /etc/psa/.psa.shadow)
