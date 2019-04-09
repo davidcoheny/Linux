@@ -1,0 +1,2 @@
+nc -v -z localhost 22
+nc -v -z google.com 80
