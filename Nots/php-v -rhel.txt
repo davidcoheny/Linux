@@ -1,7 +1,0 @@
-yum install rh-php71-php-pdo.x86_64 rh-php71-php-xml.x86_64  rh-php71-php-pgsql.x86_64 rh-php71-php-common.x86_64 rh-php71-php-process.x86_64 rh-php71-php-cli.x86_64  rh-php71-php-gd.x86_64 rh-php71-php-pear.noarch rh-php71-php-mysqlnd.x86_64
-mv /etc/httpd/conf.d/php.conf /etc/httpd/conf.d/php54.off
-mv /etc/httpd/conf.modules.d/10-php.conf /etc/httpd/conf.modules.d/10-php54.off
-yum install rh-php71 rh-php71-php rh-php71-php-gd rh-php71-php-mbstring rh-php71-php-mysqlnd rh-php71-php-pdo rh-php71-php-xml rh-php71-php-pgsql 
-ln -s /opt/rh/httpd24/root/etc/httpd/conf.d/rh-php71-php.conf /etc/httpd/conf.d/
-ln -s /opt/rh/httpd24/root/etc/httpd/conf.modules.d/15-rh-php71-php.conf /etc/httpd/conf.modules.d/
-ln -s /opt/rh/httpd24/root/etc/httpd/modules/librh-php71-php7.so /etc/httpd/modules/

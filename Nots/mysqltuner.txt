@@ -1,5 +1,0 @@
-time php index.php ( need to be in the foldre)
-mysqltuner.pl
-
-
-vi /etc/my.cnf

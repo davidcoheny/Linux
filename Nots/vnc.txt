@@ -1,5 +1,0 @@
-/home/adminq/.vnc/xstartup
-
-vnc4server -kill :<number>    number in /home/USER/.vnc/NAME-desktop\:.... 
-
-
