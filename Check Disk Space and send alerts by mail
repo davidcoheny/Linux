@@ -1,0 +1,20 @@
+#!/bin/bash 
+
+
+sendLog () {
+        mail_list=("arielberg@gmail.com" "malki.cymbalista@gmail.com" "ezrabick@gmail.com")
+        for mail in "${mail_list[@]}"; do
+                echo "$1" | mail -s "Disk Space Usage Too High - NEED FIX A.S.A.P" "$mail"
+        done
+}
+
+
+DISK_SPACE=$(df -H | grep root | awk '{ print $5 " " $1 }' | cut -d'%' -f1)
+
+if [ "$DISK_SPACE"  -ge 85 ]
+        then
+            sendLog "Disk Space Usage at etzion.org.il is too high"
+fi
+
+
+

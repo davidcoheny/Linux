@@ -1,0 +1,2 @@
+33 18 * * * /usr/bin/rsync -e ssh -aq root@88.99.226.164:/backup /home/ludmila/hetzner > /dev/null 2>&1
+

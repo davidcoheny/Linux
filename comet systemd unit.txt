@@ -1,0 +1,17 @@
+[Unit]
+Description=Comet Server
+After=network.target
+
+[Service]
+ExecStart=/home/comet/cometd
+WorkingDirectory=/home/comet
+User=comet
+Group=comet
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+
+
+
+add the unit to (name.service) vi /etc/systemd/system/cometd.service
