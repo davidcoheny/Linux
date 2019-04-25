@@ -1,0 +1,19 @@
+Host s1
+     user root
+Host s2
+     user root
+Host 82.196.242.51
+	User root
+Host tower
+	user root
+Host qbit
+	User david
+Host 176.9.107.241
+	User david
+
+Host *
+  HashKnownHosts no
+  ServerAliveInterval 300
+  ServerAliveCountMax 2
+  ForwardAgent yes
+  User secura
