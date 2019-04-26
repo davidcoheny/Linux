@@ -10,6 +10,6 @@ then
  done                                                                                                                 
                                                                                                                       
  firewall-cmd --reload                                                                                                
-                                                                                                                      
+mail -s "Fireall block $i" mrdavidyosef@gmail.com < . 2>&1 /dev/null                                                  
  echo "" > /var/log/httpd/error_log                                                                                   
 fi                                                                                                                    
