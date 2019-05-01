@@ -1,0 +1,25 @@
+journalctl -b -1
+
+journalctl -o verbose
+
+journalctl -o verbose -ef
+
+journalctl -p emerg..err -o verbose -ef
+
+journalctl -p emerg..err --since "2019-03-20 20:00:00" --until "2019-03-22 21:00:00" -o verbose
+
+journalctl -p info --since "2019-02-02 20:00:00" --until "2019-03-02 23:00:00" -o verbose _SYSTEMD_UNIT=sshd.service -ef
+
+----------------------------------
+| Persisting the journal - Lab 1 |
+----------------------------------
+mkdir /var/log/journal
+chown root:systemd-journal /var/log/journal
+chmod 2755 /var/log/journal
+killall -USR1 systemd-journald
+-------------------------------------
+ausearch -i -m avc -ts today    -  Check the SELinux log for any denials today >> 09/03/2009. An example of time is 18:00:00, recent (10 minutes ago), today, yesterday, this-week, week-ago, this-month, this-year,
+
+aureport -u -i --summary >>> -a avc -au 
+aureport -l -i --summary -ts today  >>> login today
+aureport --failed -ts today
