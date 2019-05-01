@@ -23,3 +23,65 @@ ausearch -i -m avc -ts today    -  Check the SELinux log for any denials today >
 aureport -u -i --summary >>> -a avc -au 
 aureport -l -i --summary -ts today  >>> login today
 aureport --failed -ts today
+
+----------------------------------
+|Configuring Remote Logging      |
+----------------------------------
+
+********** Server A **************
+systemctl is-active rsyslog
+systemctl is-enabled rsyslog
+
+vim /etc/rsyslog.conf
+$ModLoad imtcp
+$InputTCPServerRun 514
+
+Under the "#### RULES ####" section
+man 5 rsyslog.conf - line 416
+$template DynamicFile,"/var/log/loghost/%HOSTNAME%/%syslogfacility-text%.log"
+*.* -?DynamicFile 
+
+systemctl restart rsyslog
+systemctl status rsyslog   >>>> WILL LET U KNOW IF SOMTHING IS WORNG!!!!
+
+vim /etc/logrotate.d/syslog
+/var/log/loghost/*/*.log
+
+firewall-cmd --add-port=514/tcp --permanent
+firewall-cmd --reload
+
+*********** Server B ****************
+vim /etc/rsyslog.conf
+*.* @@servera.lab.example.com:514   ( @@ for TCP @ for UDP )
+
+systemctl restart rsyslog
+
+logger -p user.info "Test user.info message from serverb"
+logger -p authpriv.crit "Test authpriv.crit message from serverb"
+
+********** Server A **************
+grep 'user\.info' /var/log/loghost/serverb/user.log
+
+
+----------------------------------------------------------
+auditctl -w /usr/sbin/useradd -p x -k add_user
+auditctl -l >> /etc/audit/rules.d/audit.rules
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
