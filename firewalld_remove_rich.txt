@@ -1,0 +1,1 @@
+ for i in $(firewall-cmd --list-rich-rules | grep drop | awk -F " " '{print $4}' | awk -F "\"" '{print $2}') ; do firewall-cmd --permanent --remove-rich-rule="rule family="ipv4" source address=$i drop" ; done
