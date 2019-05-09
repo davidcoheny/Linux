@@ -135,38 +135,3 @@ auditctl -w /etc/sysconfig -p rwa -k config-access
 ausearch -i -k config-change                       
 
 
-yum -y install pcp pcp-system-tools
-systemctl start pmcd
-pmstat -s 5 (like vmstat)
-
-pmatop (like top)
-
-pminfo
-pminfo -dt proc.nprocs
-pmval -s 5 proc.nprocs
-yum install pcp-doc (documentation for pcp)
-mandb (updata the man databases)
-man pcpintro
-Man pmval
-
-pmval -a /var/log/pcp/pmlogger/server1/20190311.20.53.0 kernel.percpu.cpu.idle -S '@Sun Mar 24 21:10:00 2019' -T
-'@Sun Mar 24 12:14:00 2019'
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
