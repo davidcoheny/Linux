@@ -39,7 +39,9 @@ $InputTCPServerRun 514
 Under the "#### RULES ####" section
 man 5 rsyslog.conf - line 416
 $template DynamicFile,"/var/log/loghost/%HOSTNAME%/%syslogfacility-text%.log"
-*.* -?DynamicFile 
+$template DynamicFile,"/var/log/loghost/%HOSTNAME%.log"
+*.* -?DynamicFile     >>>> the (-) no syncing   
+cron.* ?DynamicFile
 
 systemctl restart rsyslog
 systemctl status rsyslog   >>>> WILL LET U KNOW IF SOMTHING IS WORNG!!!!
@@ -65,6 +67,26 @@ grep 'user\.info' /var/log/loghost/serverb/user.log
 
 
 ----------------------------------
+|Installing Performance Co-Pilot |
+----------------------------------
+yum -y install pcp
+systemctl enable --now pmcd
+pmstat -s 5
+pmatop
+pminfo -dt proc.nprocs
+pmval -s 5 proc.nprocs
+systemctl enable pmlogger
+/var/log/pcp/pmlogger/HOSTNAME  >>> log files
+pmval -a /var/log/pcp/pmlogger/serverX.example.com/20150224.00.10.0 kernel.all.load -S '@ Tue Feb 24 03:03:00 2015' -T '@ Tue Feb 24 03:04:00 2015'
+
+pmval -a /var/log/pcp/pmlogger/s1/20190509.12.20.0 kernel.all.load -S '@ today 12:25:00' -T '@ Today 12:26:00'
+pmval -T 1minute kernel.percpu.cpu.idle  >> check cpu idle for 1 minute (works with sec)
+yum install pcp-doc (documentation for pcp)
+mandb (updata the man databases)
+man pcpintro
+Man pmval
+
+----------------------------------
 |         Configuring aide       |
 ----------------------------------
 
@@ -78,6 +100,10 @@ p=permissions i=inode u=user ownership g=group ownership acl selinux
 
 aide --init
 
+mv /var/lib/aide/aide.db.new.gz /var/lib/aide/aide.db.gz
+
+aide --check
+
 systemctl status auditd.service  >> if not running log kernel log file will be send to rsyslog
 
 auditctl -w /usr/sbin/useradd -p x -k add_user >> -W will delete the rule
@@ -85,8 +111,19 @@ auditctl -w /usr/sbin/useradd -p x -k add_user >> -W will delete the rule
 auditctl -D >> will remove all rules    
 
 auditctl -l >> /etc/audit/rules.d/audit.rules  >> persistent       
+              -------------------
+  	      | man audit.rules  |
+              -------------------
 
-@@@@ IMPORTANT @@@@@@
+              r - read of the file
+
+              w - write to the file
+
+              x - execute the file
+
+              a - change in the file's attribute
+
+@@@@@@@@@@@@@@@@@ IMPORTANT @@@@@@
 SYSTEMCTL WILL NOT WORK >> use service auditd restart 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
