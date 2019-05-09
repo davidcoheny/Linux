@@ -63,9 +63,39 @@ logger -p authpriv.crit "Test authpriv.crit message from serverb"
 grep 'user\.info' /var/log/loghost/serverb/user.log
 
 
-----------------------------------------------------------
-auditctl -w /usr/sbin/useradd -p x -k add_user
-auditctl -l >> /etc/audit/rules.d/audit.rules
+
+----------------------------------
+|         Configuring aide       |
+----------------------------------
+
+yum install aide
+vim /etc/aide.conf  == PERMS = p+u+g+acl+selinux+xattrs
+====== PERMS =====
+p=permissions i=inode u=user ownership g=group ownership acl selinux
+!/etc/ >> will exclude /etc
+=/etc  >> will check only in directory and not recurse
+==========================
+
+aide --init
+
+systemctl status auditd.service  >> if not running log kernel log file will be send to rsyslog
+
+auditctl -w /usr/sbin/useradd -p x -k add_user >> -W will delete the rule
+
+auditctl -D >> will remove all rules    
+
+auditctl -l >> /etc/audit/rules.d/audit.rules  >> persistent       
+
+@@@@ IMPORTANT @@@@@@
+SYSTEMCTL WILL NOT WORK >> use service auditd restart 
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+                                                   
+ausearch -i -m avc -ts today                       
+                                                   
+auditctl -w /etc/sysconfig -p rwa -k config-access 
+                                                   
+ausearch -i -k config-change                       
 
 
 
