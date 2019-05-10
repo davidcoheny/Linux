@@ -134,4 +134,34 @@ auditctl -w /etc/sysconfig -p rwa -k config-access
                                                    
 ausearch -i -k config-change                       
 
+--------------------------------
+|          Boot Loader         |
+--------------------------------
+grep "^menuentry" /boot/grub2/grub.cfg | cut -d "'" -f2
+grub2-set-default "CentOS Linux (3.10.0-957.el7.x86_64) 7 (Core)"  --- It will betwien ' '
+grub2-editenv list
+
+dd if=/dev/zero of=/dev/vda bs=446 count=1 -- LAB install grub
+xxd -l 512 /dev/vda
+chroot /mnt/sysimage
+grub2-install /dev/vda
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
