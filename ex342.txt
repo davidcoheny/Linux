@@ -148,13 +148,22 @@ grub2-install /dev/vda
 -----------------------------------
 | Reinstalling grub2 on UEFI-based |
 -----------------------------------
+Salf LAB - echo " " >  grubx64.efi -- will destroy the boot loader
 yum reinstall grub2-efi shim
 grub2-mkconfig -o /boot/efi/EFI/redhat/grub.cfg
 
 efibootmgr - manipulate the UEFI Boot Manager
 efibootmgr -v for more info
+efibootmgr -b 0004 -B  {delete 0004}
+efibootmgr -n 0004 {next boot}
+efibootmgr -c -d /dev/vda -p 2 -L "Yippie" -l "\EFI\yippie.efi" adds a new entry named Yippie {man page}
 
+----------------------------------
+| Dealing with Failing Services  |
+----------------------------------
+systemctl list-dependencies nfs-server.service
 
+PAGE 96
 
 
 
