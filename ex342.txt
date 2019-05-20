@@ -145,6 +145,15 @@ dd if=/dev/zero of=/dev/vda bs=446 count=1 -- LAB install grub
 xxd -l 512 /dev/vda
 chroot /mnt/sysimage
 grub2-install /dev/vda
+-----------------------------------
+| Reinstalling grub2 on UEFI-based |
+-----------------------------------
+yum reinstall grub2-efi shim
+grub2-mkconfig -o /boot/efi/EFI/redhat/grub.cfg
+
+efibootmgr - manipulate the UEFI Boot Manager
+efibootmgr -v for more info
+
 
 
 
