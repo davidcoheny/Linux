@@ -10,6 +10,8 @@ journalctl -p emerg..err --since "2019-03-20 20:00:00" --until "2019-03-22 21:00
 
 journalctl -p info --since "2019-02-02 20:00:00" --until "2019-03-02 23:00:00" -o verbose _SYSTEMD_UNIT=sshd.service -ef
 
+journalctl -u sshd
+
 ----------------------------------
 | Persisting the journal - Lab 1 |
 ----------------------------------
@@ -128,7 +130,7 @@ SYSTEMCTL WILL NOT WORK >> use service auditd restart
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
                                                    
-ausearch -i -m avc -ts today                       
+ausearch -i -m avc -ts 14:33:36 05/22/19
                                                    
 auditctl -w /etc/sysconfig -p rwa -k config-access 
                                                    
@@ -182,6 +184,8 @@ hdparm -I /dev/sda
 lspci -v
 lsusb -v
 
+yum install mcelog ; systemctl enable --now mcelog 
+journalctl -u mcelog.service  >> see log from mcelog
 PAGE 101
 
 
