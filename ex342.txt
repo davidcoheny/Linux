@@ -1,3 +1,4 @@
+journalctl --list-boots
 journalctl -b -1
 
 journalctl -o verbose
@@ -15,11 +16,19 @@ journalctl -u sshd
 ----------------------------------
 | Persisting the journal - Lab 1 |
 ----------------------------------
+By default the logs are in /run/log/journal
+
 mkdir /var/log/journal
 chown root:systemd-journal /var/log/journal
 chmod 2755 /var/log/journal
 killall -USR1 systemd-journald
--------------------------------------
+--------------------------
+| firewall enable debug  |
+--------------------------
+vim /usr/lib/systemd/system/firewalld.service  >> where the arguments are
+vim /etc/sysconfig/firewalld
+FIREWALLD_ARGS="--debug=10"
+
 ausearch -i -m avc -ts today    -  Check the SELinux log for any denials today >> 09/03/2009. An example of time is 18:00:00, recent (10 minutes ago), today, yesterday, this-week, week-ago, this-month, this-year,
 
 aureport -u -i --summary >>> -a avc -au 
@@ -186,7 +195,7 @@ lsusb -v
 
 yum install mcelog ; systemctl enable --now mcelog 
 journalctl -u mcelog.service  >> see log from mcelog
-PAGE 101
+PAGE 120
 
 
 
