@@ -34,6 +34,11 @@ ausearch -i -m avc -ts today    -  Check the SELinux log for any denials today >
 aureport -u -i --summary >>> -a avc -au 
 aureport -l -i --summary -ts today  >>> login today
 aureport --failed -ts today
+----------------------------------
+| Lab: What Is Troubleshooting?  |
+----------------------------------
+snapshot: Lab_What_Is_Troubleshooting 
+semanage fcontext -a -t public_content_t "/var/ftp/pub(/.*)?"  >> diffrent from the lab 
 
 ----------------------------------
 |Configuring Remote Logging      |
@@ -87,8 +92,8 @@ pmatop
 pminfo -dt proc.nprocs
 pmval -s 5 proc.nprocs
 systemctl enable pmlogger
-/var/log/pcp/pmlogger/HOSTNAME  >>> log files
-pmval -a /var/log/pcp/pmlogger/serverX.example.com/20150224.00.10.0 kernel.all.load -S '@ Tue Feb 24 03:03:00 2015' -T '@ Tue Feb 24 03:04:00 2015'
+pcp >> will show the location of the log file  >> /var/log/pcp/pmlogger/HOSTNAME  >>> log files
+pmval -a /var/log/pcp/pmlogger/serverX.example.com/20150224.00.10.0 kernel.all.load -S '@ Tue Feb 24 03:03:00 2015' -T '@ Tue Feb 24 03:04:00 2015'  >> from a log file
 
 pmval -a /var/log/pcp/pmlogger/s1/20190509.12.20.0 kernel.all.load -S '@ today 12:25:00' -T '@ Today 12:26:00'
 pmval -T 1minute kernel.percpu.cpu.idle  >> check cpu idle for 1 minute (works with sec)
