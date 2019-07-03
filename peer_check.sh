@@ -36,7 +36,7 @@ echo " "
 ## WILL DISPLAY ONLY THE MAIN IP ADDRESS !!
 IPADDR=`/usr/sbin/ip route get 8.8.8.8 | awk -F"src " 'NR==1{split($2,a," ");print a[1]}'`
 echo -e "#18 \e[32mLocal IP Address: $IPADDR"
-PUBLIC_IP=`curl http://icanhazip.com 2> /dev/null`
+PUBLIC_IP=`curl https://ifconfig.me/ 2> /dev/null`
 echo -e "    \e[32mPublic IP Address $PUBLIC_IP"
 echo -e " \e[39m"
 echo " "
@@ -83,7 +83,7 @@ echo -e " \e[39m"
 fi
 
 #Number 41 - Install the Automate Agent
-LTECHAGENT=`systemctl status ntpd | grep Active | awk -F " " '{print $3}' | grep running 2> /dev/null`
+LTECHAGENT=`systemctl status ltechagent | grep Active | awk -F " " '{print $3}' | grep running 2> /dev/null`
 if [ -z "$LTECHAGENT" ]; then
        echo -e "#41 \e[31mltechagent NOT Running !!!"
 echo -e "\e[39m"
